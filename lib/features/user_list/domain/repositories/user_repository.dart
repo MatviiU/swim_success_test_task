@@ -1,4 +1,4 @@
-import 'package:swim_success/features/user_list/domain/user_entity.dart';
+import 'package:swim_success/features/user_list/domain/entities/user_entity.dart';
 
 abstract interface class UserRepository {
   Future<List<UserEntity>> getUsers();
