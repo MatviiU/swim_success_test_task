@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swim_success/core/errors/failures.dart';
+import 'package:swim_success/features/pace_selector/domain/constants/pace_constants.dart';
 import 'package:swim_success/features/pace_selector/domain/repositories/pace_repository.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_state.dart';
 
@@ -7,9 +8,6 @@ class PaceCubit extends Cubit<PaceState> {
   PaceCubit(this.paceRepository) : super(const PaceState());
 
   final PaceRepository paceRepository;
-
-  static const _minSeconds = 30;
-  static const _maxSeconds = 180;
 
   void setMinutes(int minutes) {
     _updatePace(minutes * 60 + state.seconds);
@@ -39,7 +37,10 @@ class PaceCubit extends Cubit<PaceState> {
   }
 
   void _updatePace(int totalSeconds) {
-    final clampedSeconds = totalSeconds.clamp(_minSeconds, _maxSeconds);
+    final clampedSeconds = totalSeconds.clamp(
+      PaceConstants.minSeconds,
+      PaceConstants.maxSeconds,
+    );
     if (clampedSeconds == state.paceSeconds) return;
     emit(state.copyWith(paceSeconds: clampedSeconds));
   }

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swim_success/features/pace_selector/domain/constants/pace_constants.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_cubit.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_state.dart';
 
 class PaceSliderWidget extends StatelessWidget {
   const PaceSliderWidget({super.key});
-
-  static const _minSeconds = 30;
-  static const _maxSeconds = 180;
-
-  static const _ticks = [70, 90, 120];
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +19,17 @@ class PaceSliderWidget extends StatelessWidget {
           children: [
             Slider(
               value: state.paceSeconds.toDouble(),
-              min: _minSeconds.toDouble(),
-              max: _maxSeconds.toDouble(),
-              divisions: _maxSeconds - _minSeconds,
+              min: PaceConstants.minSeconds.toDouble(),
+              max: PaceConstants.maxSeconds.toDouble(),
+              divisions: PaceConstants.maxSeconds - PaceConstants.minSeconds,
               onChanged: (value) => cubit.setFromSlider(value.round()),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: _TickLabels(
-                ticks: _ticks,
-                min: _minSeconds,
-                max: _maxSeconds,
+                ticks: PaceConstants.sliderTickSeconds,
+                min: PaceConstants.minSeconds,
+                max: PaceConstants.maxSeconds,
               ),
             ),
           ],

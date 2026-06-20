@@ -1,3 +1,5 @@
+import 'package:swim_success/features/pace_selector/domain/constants/pace_constants.dart';
+
 enum SwimmerLevel {
   beginner('Beginner'),
   intermediate('Intermediate'),
@@ -7,9 +9,15 @@ enum SwimmerLevel {
   const SwimmerLevel(this.label);
 
   factory SwimmerLevel.fromSeconds(int seconds) {
-    if (seconds < 70) return SwimmerLevel.elite;
-    if (seconds < 90) return SwimmerLevel.advanced;
-    if (seconds < 120) return SwimmerLevel.intermediate;
+    if (seconds < PaceConstants.eliteThresholdSeconds) {
+      return SwimmerLevel.elite;
+    }
+    if (seconds < PaceConstants.advancedThresholdSeconds) {
+      return SwimmerLevel.advanced;
+    }
+    if (seconds < PaceConstants.intermediateThresholdSeconds) {
+      return SwimmerLevel.intermediate;
+    }
     return SwimmerLevel.beginner;
   }
 
