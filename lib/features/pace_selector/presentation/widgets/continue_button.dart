@@ -15,7 +15,9 @@ class ContinueButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return ElevatedButton(
-          onPressed: state.isSubmitting ? null : () => cubit.submitPace,
+          onPressed: state.isSubmitting
+              ? null
+              : () => cubit.submitPace(state.paceSeconds),
           child: state.isSubmitting
               ? const SizedBox(
                   height: 22,

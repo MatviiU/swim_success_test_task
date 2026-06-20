@@ -26,7 +26,8 @@ class PaceSelectorPage extends StatelessWidget {
               messenger.showSnackBar(
                 SnackBar(
                   content: Text(
-                    state.errorMessage ?? AppStringsConstants.somethingWentWrong,
+                    state.errorMessage ??
+                        AppStringsConstants.somethingWentWrong,
                   ),
                 ),
               );
@@ -34,6 +35,7 @@ class PaceSelectorPage extends StatelessWidget {
               messenger.showSnackBar(
                 const SnackBar(
                   content: Text(AppStringsConstants.paceSubmitted),
+                  duration: Duration(seconds: 1),
                 ),
               );
             }
@@ -50,7 +52,10 @@ class PaceSelectorPage extends StatelessWidget {
                   SizedBox(height: 32),
                   SwimmerLevelWidget(),
                   Spacer(),
-                  const SizedBox(width: double.infinity, child: ContinueButton()),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: ContinueButton(),
+                  ),
                 ],
               ),
             ),
