@@ -14,7 +14,8 @@ class UserListTile extends StatelessWidget {
       title: Text(user.name),
       subtitle: Text(user.email),
       trailing: Text(user.phone),
-      onTap: () => context.push('${AppRoutes.users}/${user.userId}'),
+      onTap: () =>
+          context.push('${AppRoutes.users}/${user.userId}', extra: user),
     );
   }
 }
