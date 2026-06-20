@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/user_list/presentation/cubits/user_list_cubit.dart';
 import 'package:swim_success/features/user_list/presentation/cubits/user_list_state.dart';
+import 'package:swim_success/features/user_list/presentation/widgets/error_view_widget.dart';
+import 'package:swim_success/features/user_list/presentation/widgets/search_input_widget.dart';
+import 'package:swim_success/features/user_list/presentation/widgets/user_list_view_widget.dart';
 
 class UserListPage extends StatelessWidget {
   const UserListPage({super.key});
@@ -11,7 +14,7 @@ class UserListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<UserListCubit>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Users')),
+      appBar: AppBar(title: const Text(AppStringsConstants.users)),
       body: BlocBuilder<UserListCubit, UserListState>(
         builder: (context, state) {
           return switch (state) {
@@ -23,52 +26,21 @@ class UserListPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextField(
+                  child: SearchInputWidget(
                     onChanged: (value) => cubit.searchUsers(value),
-                    decoration: const InputDecoration(
-                      hintText: 'Search by name',
-                      prefixIcon: Icon(Icons.search),
-                    ),
                   ),
                 ),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () => cubit.getUsers(),
-                    child: state.filteredUsers.isEmpty
-                        ? ListView(
-                            children: [
-                              const Center(child: Text('No users found')),
-                            ],
-                          )
-                        : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            itemCount: state.filteredUsers.length,
-                            itemBuilder: (context, index) {
-                              final user = state.filteredUsers[index];
-                              return ListTile(
-                                title: Text(user.name),
-                                subtitle: Text(user.email),
-                                trailing: Text(user.phone),
-                                onTap: () => context.go('user/${user.userId}'),
-                              );
-                            },
-                          ),
+                    child: UserListViewWidget(users: state.filteredUsers),
                   ),
                 ),
               ],
             ),
-            UserListFailure() => Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 16,
-                children: [
-                  Text(state.failure.message),
-                  ElevatedButton(
-                    onPressed: () => cubit.getUsers(),
-                    child: const Text('Try again'),
-                  ),
-                ],
-              ),
+            UserListFailure() => ErrorViewWidget(
+              message: state.failure.message,
+              onRetry: () => cubit.getUsers(),
             ),
           };
         },
