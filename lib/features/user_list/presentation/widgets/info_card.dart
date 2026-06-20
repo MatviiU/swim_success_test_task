@@ -11,7 +11,7 @@ class InfoCard extends StatelessWidget {
     final visible = tiles.where((tile) => tile.value.isNotEmpty).toList();
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
         child: Column(
           children: [
             for (var i = 0; i < visible.length; i++) ...[
