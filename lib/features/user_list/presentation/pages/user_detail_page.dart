@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/user_list/domain/entities/user_entity.dart';
 import 'package:swim_success/features/user_list/presentation/widgets/info_card.dart';
 import 'package:swim_success/features/user_list/presentation/widgets/info_tile.dart';
@@ -22,27 +23,27 @@ class UserDetailPage extends StatelessWidget {
             tiles: [
               InfoTile(
                 icon: Icons.email_outlined,
-                label: 'Email',
+                label: AppStringsConstants.email,
                 value: user.email,
               ),
               InfoTile(
                 icon: Icons.phone_outlined,
-                label: 'Phone',
+                label: AppStringsConstants.phone,
                 value: user.phone,
               ),
               InfoTile(
                 icon: Icons.language_outlined,
-                label: 'Website',
+                label: AppStringsConstants.website,
                 value: user.website,
               ),
               InfoTile(
                 icon: Icons.business_outlined,
-                label: 'Company',
+                label: AppStringsConstants.company,
                 value: user.company,
               ),
               InfoTile(
                 icon: Icons.location_city_outlined,
-                label: 'City',
+                label: AppStringsConstants.city,
                 value: user.city,
               ),
             ],

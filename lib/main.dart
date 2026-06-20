@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/core/di/injector.dart';
 import 'package:swim_success/core/router/app_router.dart';
 import 'package:swim_success/core/theme/app_theme.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Swim Success',
+      title: AppStringsConstants.appName,
       theme: AppTheme.dark,
       routerConfig: appRouter,
     );

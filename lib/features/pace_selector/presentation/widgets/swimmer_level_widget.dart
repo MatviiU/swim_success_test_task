@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_cubit.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_state.dart';
 
@@ -17,7 +18,7 @@ class SwimmerLevelWidget extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your level', style: theme.textTheme.bodyMedium),
+            Text(AppStringsConstants.yourLevel, style: theme.textTheme.bodyMedium),
             const SizedBox(height: 4),
             Text(
               state.swimmerLevel.label,

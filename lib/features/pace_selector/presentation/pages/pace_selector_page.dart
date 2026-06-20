@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_cubit.dart';
 import 'package:swim_success/features/pace_selector/presentation/cubit/pace_state.dart';
 import 'package:swim_success/features/pace_selector/presentation/widgets/continue_button.dart';
@@ -13,7 +14,7 @@ class PaceSelectorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Set your pace')),
+      appBar: AppBar(title: const Text(AppStringsConstants.setYourPace)),
       body: BlocListener<PaceCubit, PaceState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
@@ -21,12 +22,16 @@ class PaceSelectorPage extends StatelessWidget {
           if (state.status == SubmissionStatus.error) {
             messenger.showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage ?? 'Something went wrong'),
+                content: Text(
+                  state.errorMessage ?? AppStringsConstants.somethingWentWrong,
+                ),
               ),
             );
           } else if (state.status == SubmissionStatus.success) {
             messenger.showSnackBar(
-              const SnackBar(content: Text('Pace submitted')),
+              const SnackBar(
+                content: Text(AppStringsConstants.paceSubmitted),
+              ),
             );
           }
         },

@@ -1,10 +1,11 @@
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/pace_selector/domain/constants/pace_constants.dart';
 
 enum SwimmerLevel {
-  beginner('Beginner'),
-  intermediate('Intermediate'),
-  advanced('Advanced'),
-  elite('Elite');
+  beginner(AppStringsConstants.swimmerLevelBeginner),
+  intermediate(AppStringsConstants.swimmerLevelIntermediate),
+  advanced(AppStringsConstants.swimmerLevelAdvanced),
+  elite(AppStringsConstants.swimmerLevelElite);
 
   const SwimmerLevel(this.label);
 

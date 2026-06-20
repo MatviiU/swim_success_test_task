@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 
 class HomeShell extends StatelessWidget {
   const HomeShell({super.key, required this.navigationShell});
@@ -17,12 +18,12 @@ class HomeShell extends StatelessWidget {
           NavigationDestination(
             icon: Icon(Icons.speed_outlined),
             selectedIcon: Icon(Icons.speed),
-            label: 'Pace',
+            label: AppStringsConstants.pace,
           ),
           NavigationDestination(
             icon: Icon(Icons.people_outline),
             selectedIcon: Icon(Icons.people),
-            label: 'Users',
+            label: AppStringsConstants.users,
           ),
         ],
       ),

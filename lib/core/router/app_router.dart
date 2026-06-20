@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/core/di/injector.dart';
 import 'package:swim_success/core/router/app_routes.dart';
 import 'package:swim_success/core/widgets/home_shell.dart';
@@ -44,7 +45,9 @@ final appRouter = GoRouter(
                     final user = state.extra as UserEntity?;
                     if (user == null) {
                       return const Scaffold(
-                        body: Center(child: Text('User not found')),
+                        body: Center(
+                          child: Text(AppStringsConstants.userNotFound),
+                        ),
                       );
                     }
                     return UserDetailPage(user: user);
