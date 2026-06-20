@@ -18,10 +18,6 @@ class PaceCubit extends Cubit<PaceState> {
     _updatePace(state.minutes * 60 + clampedSeconds);
   }
 
-  void increment() => _updatePace(state.paceSeconds + 1);
-
-  void decrement() => _updatePace(state.paceSeconds - 1);
-
   void setFromSlider(int seconds) => _updatePace(seconds);
 
   Future<void> submitPace(int seconds) async {
