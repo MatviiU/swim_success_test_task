@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/core/di/injector.dart';
 import 'package:swim_success/core/router/app_routes.dart';
 import 'package:swim_success/core/widgets/home_shell.dart';
@@ -41,15 +39,12 @@ final appRouter = GoRouter(
               routes: [
                 GoRoute(
                   path: ':id',
+                  redirect: (context, state) {
+                    return state.extra == null ? AppRoutes.users : null;
+                  },
                   builder: (context, state) {
-                    final user = state.extra as UserEntity?;
-                    if (user == null) {
-                      return const Scaffold(
-                        body: Center(
-                          child: Text(AppStringsConstants.userNotFound),
-                        ),
-                      );
-                    }
+                    //redirect always will always trigger before the builder
+                    final user = state.extra! as UserEntity;
                     return UserDetailPage(user: user);
                   },
                 ),
