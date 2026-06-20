@@ -1,6 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:swim_success/core/network/http_client.dart';
+import 'package:swim_success/features/pace_selector/data/data_sources/pace_data_source.dart';
+import 'package:swim_success/features/pace_selector/data/repositories/pace_repository_impl.dart';
+import 'package:swim_success/features/pace_selector/domain/repositories/pace_repository.dart';
+import 'package:swim_success/features/pace_selector/presentation/cubit/pace_cubit.dart';
 import 'package:swim_success/features/user_list/data/data_sources/user_list_data_source.dart';
 import 'package:swim_success/features/user_list/data/repositories/user_list_repository_impl.dart';
 import 'package:swim_success/features/user_list/domain/repositories/user_list_repository.dart';
@@ -21,6 +25,7 @@ void _registerCore() {
 
 void _registerFeatures() {
   _registerUserList();
+  _registerPaceSelector();
 }
 
 void _registerUserList() {
@@ -32,4 +37,11 @@ void _registerUserList() {
       () => UserListRepositoryImpl(getIt()),
     )
     ..registerFactory(() => UserListCubit(getIt()));
+}
+
+void _registerPaceSelector() {
+  getIt
+    ..registerLazySingleton<PaceDataSource>(() => PaceDataSourceImpl(getIt()))
+    ..registerLazySingleton<PaceRepository>(() => PaceRepositoryImpl(getIt()))
+    ..registerFactory(() => PaceCubit(getIt()));
 }
