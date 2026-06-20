@@ -24,11 +24,12 @@ class PaceState extends Equatable {
     int? paceSeconds,
     SubmissionStatus? status,
     String? errorMessage,
+    bool clearError = false,
   }) {
     return PaceState(
       paceSeconds: paceSeconds ?? this.paceSeconds,
       status: status ?? this.status,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 
