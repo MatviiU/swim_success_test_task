@@ -17,6 +17,7 @@ class PaceState extends Equatable {
   int get minutes => paceSeconds ~/ 60;
   int get seconds => paceSeconds % 60;
   SwimmerLevel get swimmerLevel => SwimmerLevel.fromSeconds(paceSeconds);
+  String get formattedPace => '$minutes:${seconds.toString().padLeft(2, '0')}';
 
   bool get isSubmitting => status == SubmissionStatus.loading;
 

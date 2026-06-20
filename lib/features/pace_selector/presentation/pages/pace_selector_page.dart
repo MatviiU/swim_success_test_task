@@ -33,8 +33,8 @@ class PaceSelectorPage extends StatelessWidget {
               );
             } else if (state.status == SubmissionStatus.success) {
               messenger.showSnackBar(
-                const SnackBar(
-                  content: Text(AppStringsConstants.paceSubmitted),
+                SnackBar(
+                  content: Text('Saved ${state.formattedPace} - ${state.swimmerLevel.label}'),
                   duration: Duration(seconds: 1),
                 ),
               );
