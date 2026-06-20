@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swim_success/core/constants/app_constants.dart';
 import 'package:swim_success/features/user_list/presentation/cubits/user_list_cubit.dart';
 import 'package:swim_success/features/user_list/presentation/cubits/user_list_state.dart';
-import 'package:swim_success/features/user_list/presentation/widgets/error_view_widget.dart';
-import 'package:swim_success/features/user_list/presentation/widgets/search_input_widget.dart';
+import 'package:swim_success/core/widgets/error_view_widget.dart';
+import 'package:swim_success/core/widgets/search_input_widget.dart';
 import 'package:swim_success/features/user_list/presentation/widgets/user_list_view_widget.dart';
 
 class UserListPage extends StatelessWidget {
