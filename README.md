@@ -1,17 +1,71 @@
-# swim_success
+# Swim Success — Тестове завдання Flutter
 
-A new Flutter project.
+Два незалежні екрани в одному Flutter-проєкті: **Pace Selector** і **User List**, перемикання через нижній таб-бар.
 
-## Getting Started
+## State management
 
-This project is a starting point for a Flutter application.
+**flutter_bloc (Cubit).** Обидва екрани використовують Cubit, а не повний Bloc-with-events — взаємодії прості (задати значення, відправити, завантажити) і не потребують шару подій. Riverpod/GetX не використано, щоб лишитись у межах найпоширенішого, перевіреного патерну.
 
-A few resources to get you started if this is your first Flutter project:
+- **Pace Selector** має єдиний `PaceState` з одним джерелом істини: `paceSeconds` (int). `minutes`, `seconds`, `level`, `formattedPace` — похідні гетери, які ніколи не зберігаються окремо, тож таймер, слайдер і рівень завжди узгоджені за конструкцією. Статус відправки (`idle/loading/success/error`) — окреме enum-поле, бо обране значення і стан мережі змінюються незалежно.
+- **User List** використовує sealed-стани (`Initial/Loading/Loaded/Failure`), бо вони взаємовиключні. Пошук за іменем фільтрує вже завантажений список у пам'яті (без додаткового запиту).
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Структура проєкту
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Feature-first, з шарами Clean Architecture всередині кожної фічі:
+
+```
+lib/
+  core/
+    di/            # ручна реєстрація get_it
+    errors/        # типи Failure + Exception
+    network/       # HttpClient
+    router/        # go_router + роути
+    theme/         # опис теми додатку
+    widgets/       # спільні віджети
+    constants/     # константи додатку
+  features/
+    pace_selector/
+      data/        # data source + repository impl
+      domain/      # SwimmerLevel, контракт репозиторію, константи фічі
+      presentation/# cubit, page, widgets
+    user_list/
+      data/        # DTO, data source, repository impl
+      domain/      # entity, контракт репозиторію
+      presentation/# cubit, pages, widgets
+```
+
+Обробка помилок шарова: data source кидають типізовані `Exception`; репозиторії — єдине місце з `try/catch`, де вони мапляться в доменні `Failure`; cubit ловить `Failure` і ніколи не бачить деталей транспорту.
+
+## Діапазони рівнів плавця
+
+На основі часу 100 м вільним стилем, у загальних секундах. Нижня межа кожного швидшого рівня інклюзивна:
+
+| Час           | Рівень       |
+|---------------|--------------|
+| `< 1:10`      | Elite        |
+| `1:10 – 1:29` | Advanced     |
+| `1:30 – 1:59` | Intermediate |
+| `>= 2:00`     | Beginner     |
+
+Доступний діапазон — **0:30 – 3:00**, обмежується (clamp) у Cubit.
+
+## Ключові рішення
+
+- **Без debounce.** POST тригериться лише на **Continue**, а не на зміну слайдера, тож debounce із завдання («if you trigger requests on slider change») не потрібен.
+- **Стан редагування локальний у віджеті таймера**, не в Cubit. Текстовий контролер записується лише при вході в редагування — тож оновлення зі слайдера/стрілок не переписують його під час набору, і курсор не стрибає. Поширена проблема синхронізації поле↔слайдер уникнута за конструкцією.
+- **Деталі юзера отримують entity через `go_router` `extra`** — без другого запиту, бо список уже повертає повний об'єкт. `redirect` повертає на список, якщо роут відкрито без даних (deep-link / рестарт).
+- **Фідбек після відправки** (success-стан на кнопці + SnackBar зі збереженим часом і рівнем) додано свідомо; завдання це не специфікувало. Окремий екран не створювався, щоб лишитись у межах скоупу.
+
+## З більшим часом
+
+- Unit-тести для `PaceCubit` (логіка clamp/рівня) і мапінгу помилок репозиторію.
+- Міграція з `http` на `dio/retrofit` з інтерсепторами для логування і централізованої обробки помилок.
+- Локальне кешування списку юзерів; deep-link на деталі за id + кеш замість `extra`.
+- Локалізація.
+
+## Запуск
+
+```bash
+flutter pub get
+flutter run
+```
