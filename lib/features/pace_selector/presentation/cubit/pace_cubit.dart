@@ -25,6 +25,10 @@ class PaceCubit extends Cubit<PaceState> {
     try {
       await paceRepository.submitPace(seconds);
       emit(state.copyWith(status: SubmissionStatus.success));
+      await Future.delayed(const Duration(seconds: 2));
+      if (state.status == SubmissionStatus.success) {
+        emit(state.copyWith(status: SubmissionStatus.idle));
+      }
     } on Failure catch (e) {
       emit(
         state.copyWith(status: SubmissionStatus.error, errorMessage: e.message),
