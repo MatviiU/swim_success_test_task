@@ -15,40 +15,44 @@ class PaceSelectorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text(AppStringsConstants.setYourPace)),
-      body: BlocListener<PaceCubit, PaceState>(
-        listenWhen: (previous, current) => previous.status != current.status,
-        listener: (context, state) {
-          final messenger = ScaffoldMessenger.of(context);
-          if (state.status == SubmissionStatus.error) {
-            messenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.errorMessage ?? AppStringsConstants.somethingWentWrong,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        behavior: HitTestBehavior.opaque,
+        child: BlocListener<PaceCubit, PaceState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            final messenger = ScaffoldMessenger.of(context);
+            if (state.status == SubmissionStatus.error) {
+              messenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    state.errorMessage ?? AppStringsConstants.somethingWentWrong,
+                  ),
                 ),
+              );
+            } else if (state.status == SubmissionStatus.success) {
+              messenger.showSnackBar(
+                const SnackBar(
+                  content: Text(AppStringsConstants.paceSubmitted),
+                ),
+              );
+            }
+          },
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  Spacer(),
+                  PaceTimerWidget(),
+                  SizedBox(height: 24),
+                  PaceSliderWidget(),
+                  SizedBox(height: 32),
+                  SwimmerLevelWidget(),
+                  Spacer(),
+                  const SizedBox(width: double.infinity, child: ContinueButton()),
+                ],
               ),
-            );
-          } else if (state.status == SubmissionStatus.success) {
-            messenger.showSnackBar(
-              const SnackBar(
-                content: Text(AppStringsConstants.paceSubmitted),
-              ),
-            );
-          }
-        },
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                Spacer(),
-                PaceTimerWidget(),
-                SizedBox(height: 24),
-                PaceSliderWidget(),
-                SizedBox(height: 32),
-                SwimmerLevelWidget(),
-                Spacer(),
-                const SizedBox(width: double.infinity, child: ContinueButton()),
-              ],
             ),
           ),
         ),
