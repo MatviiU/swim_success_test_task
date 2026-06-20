@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swim_success/core/constants/app_constants.dart';
-import 'package:swim_success/features/user_list/presentation/cubits/user_list_cubit.dart';
-import 'package:swim_success/features/user_list/presentation/cubits/user_list_state.dart';
 import 'package:swim_success/core/widgets/error_view_widget.dart';
 import 'package:swim_success/core/widgets/search_input_widget.dart';
+import 'package:swim_success/features/user_list/presentation/cubits/user_list_cubit.dart';
+import 'package:swim_success/features/user_list/presentation/cubits/user_list_state.dart';
 import 'package:swim_success/features/user_list/presentation/widgets/user_list_view_widget.dart';
 
 class UserListPage extends StatelessWidget {
@@ -27,12 +27,12 @@ class UserListPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SearchInputWidget(
-                    onChanged: (value) => cubit.searchUsers(value),
+                    onChanged: cubit.searchUsers,
                   ),
                 ),
                 Expanded(
                   child: RefreshIndicator(
-                    onRefresh: () => cubit.getUsers(),
+                    onRefresh: cubit.getUsers,
                     child: UserListViewWidget(users: state.filteredUsers),
                   ),
                 ),
@@ -40,7 +40,7 @@ class UserListPage extends StatelessWidget {
             ),
             UserListFailure() => ErrorViewWidget(
               message: state.failure.message,
-              onRetry: () => cubit.getUsers(),
+              onRetry: cubit.getUsers,
             ),
           };
         },

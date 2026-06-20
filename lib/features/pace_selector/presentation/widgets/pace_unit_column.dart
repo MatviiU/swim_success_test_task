@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 
 class PaceUnitColumn extends StatefulWidget {
   const PaceUnitColumn({
-    super.key,
     required this.value,
     required this.onIncrement,
     required this.onDecrement,
     required this.onSubmitted,
+    super.key,
     this.twoDigits = true,
   });
 
@@ -34,8 +34,9 @@ class _PaceUnitColumnState extends State<PaceUnitColumn> {
 
   @override
   void dispose() {
-    _focusNode.removeListener(_onFocusChange);
-    _focusNode.dispose();
+    _focusNode
+      ..removeListener(_onFocusChange)
+      ..dispose();
     _controller.dispose();
     super.dispose();
   }

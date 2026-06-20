@@ -13,15 +13,6 @@ class UserEntity extends Equatable {
     required this.city,
   });
 
-  final String userId;
-  final String name;
-  final String email;
-  final String phone;
-  final String username;
-  final String website;
-  final String company;
-  final String city;
-
   factory UserEntity.fromDto(UserDto userDto) {
     return UserEntity(
       userId: userDto.userId,
@@ -34,6 +25,15 @@ class UserEntity extends Equatable {
       city: userDto.city,
     );
   }
+
+  final String userId;
+  final String name;
+  final String email;
+  final String phone;
+  final String username;
+  final String website;
+  final String company;
+  final String city;
 
   @override
   List<Object?> get props => [

@@ -6,7 +6,7 @@ import 'package:swim_success/features/user_list/presentation/widgets/info_tile.d
 import 'package:swim_success/features/user_list/presentation/widgets/user_details_header.dart';
 
 class UserDetailPage extends StatelessWidget {
-  const UserDetailPage({super.key, required this.user});
+  const UserDetailPage({required this.user, super.key});
 
   final UserEntity user;
 

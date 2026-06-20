@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swim_success/features/user_list/presentation/widgets/info_tile.dart';
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({super.key, required this.tiles});
+  const InfoCard({required this.tiles, super.key});
 
   final List<InfoTile> tiles;
 

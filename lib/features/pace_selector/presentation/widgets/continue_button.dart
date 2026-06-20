@@ -33,7 +33,7 @@ class ContinueButton extends StatelessWidget {
                 Text('Saved'),
               ],
             ),
-            _ => Text(AppStringsConstants.continueButton),
+            _ => const Text(AppStringsConstants.continueButton),
           },
         );
       },

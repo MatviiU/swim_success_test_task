@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swim_success/features/user_list/domain/entities/user_entity.dart';
 
 class UserDetailsHeader extends StatelessWidget {
-  const UserDetailsHeader({super.key, required this.user});
+  const UserDetailsHeader({required this.user, super.key});
 
   final UserEntity user;
 

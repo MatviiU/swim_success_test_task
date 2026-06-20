@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:swim_success/core/constants/app_constants.dart';
 
 class HomeShell extends StatelessWidget {
-  const HomeShell({super.key, required this.navigationShell});
+  const HomeShell({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 

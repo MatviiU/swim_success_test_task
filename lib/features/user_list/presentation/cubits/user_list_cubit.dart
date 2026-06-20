@@ -1,7 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swim_success/core/errors/failures.dart';
 import 'package:swim_success/features/user_list/domain/repositories/user_list_repository.dart';
 import 'package:swim_success/features/user_list/presentation/cubits/user_list_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserListCubit extends Cubit<UserListState> {
   UserListCubit(this.userListRepository) : super(const UserListInitial());

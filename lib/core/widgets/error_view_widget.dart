@@ -3,9 +3,9 @@ import 'package:swim_success/core/constants/app_constants.dart';
 
 class ErrorViewWidget extends StatelessWidget {
   const ErrorViewWidget({
-    super.key,
     required this.message,
     required this.onRetry,
+    super.key,
   });
 
   final String message;

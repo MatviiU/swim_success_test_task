@@ -24,6 +24,6 @@ class UserListRepositoryImpl implements UserListRepository {
     } catch (_) {
       throw const UnknownFailure();
     }
-    return users.map((user) => UserEntity.fromDto(user)).toList();
+    return users.map(UserEntity.fromDto).toList();
   }
 }

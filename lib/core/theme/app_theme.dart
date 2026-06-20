@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
+import 'package:swim_success/core/theme/app_colors.dart';
 
 abstract final class AppTheme {
   static ThemeData get dark {

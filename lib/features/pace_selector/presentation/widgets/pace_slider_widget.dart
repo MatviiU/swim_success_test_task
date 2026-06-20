@@ -24,8 +24,8 @@ class PaceSliderWidget extends StatelessWidget {
               divisions: PaceConstants.maxSeconds - PaceConstants.minSeconds,
               onChanged: (value) => cubit.setFromSlider(value.round()),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: _TickLabels(
                 ticks: PaceConstants.sliderTickSeconds,
                 min: PaceConstants.minSeconds,

@@ -4,7 +4,7 @@ import 'package:swim_success/features/user_list/domain/entities/user_entity.dart
 import 'package:swim_success/features/user_list/presentation/widgets/user_list_tile.dart';
 
 class UserListViewWidget extends StatelessWidget {
-  const UserListViewWidget({super.key, required this.users});
+  const UserListViewWidget({required this.users, super.key});
 
   final List<UserEntity> users;
 
@@ -12,7 +12,9 @@ class UserListViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (users.isEmpty) {
       return ListView(
-        children: [const Center(child: Text(AppStringsConstants.noUsersFound))],
+        children: const [
+          Center(child: Text(AppStringsConstants.noUsersFound)),
+        ],
       );
     }
     return ListView.builder(

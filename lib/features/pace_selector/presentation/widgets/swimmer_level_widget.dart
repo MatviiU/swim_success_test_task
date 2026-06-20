@@ -18,7 +18,10 @@ class SwimmerLevelWidget extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppStringsConstants.yourLevel, style: theme.textTheme.bodyMedium),
+            Text(
+              AppStringsConstants.yourLevel,
+              style: theme.textTheme.bodyMedium,
+            ),
             const SizedBox(height: 4),
             Text(
               state.swimmerLevel.label,

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:swim_success/core/constants/app_constants.dart';
 
-sealed class Failure extends Equatable {
+sealed class Failure extends Equatable implements Exception {
   const Failure(this.message);
 
   final String message;
@@ -20,7 +20,9 @@ final class ServerFailure extends Failure {
 }
 
 final class NetworkFailure extends Failure {
-  const NetworkFailure([super.message = AppStringsConstants.noInternetConnection]);
+  const NetworkFailure([
+    super.message = AppStringsConstants.noInternetConnection,
+  ]);
 }
 
 final class ParsingFailure extends Failure {
@@ -30,5 +32,7 @@ final class ParsingFailure extends Failure {
 }
 
 final class UnknownFailure extends Failure {
-  const UnknownFailure([super.message = AppStringsConstants.somethingWentWrong]);
+  const UnknownFailure([
+    super.message = AppStringsConstants.somethingWentWrong,
+  ]);
 }

@@ -34,15 +34,18 @@ class PaceSelectorPage extends StatelessWidget {
             } else if (state.status == SubmissionStatus.success) {
               messenger.showSnackBar(
                 SnackBar(
-                  content: Text('Saved ${state.formattedPace} - ${state.swimmerLevel.label}'),
-                  duration: Duration(seconds: 1),
+                  content: Text(
+                    'Saved ${state.formattedPace} - '
+                    '${state.swimmerLevel.label}',
+                  ),
+                  duration: const Duration(seconds: 1),
                 ),
               );
             }
           },
-          child: SafeArea(
+          child: const SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24),
               child: Column(
                 children: [
                   Spacer(),
@@ -52,7 +55,7 @@ class PaceSelectorPage extends StatelessWidget {
                   SizedBox(height: 32),
                   SwimmerLevelWidget(),
                   Spacer(),
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: ContinueButton(),
                   ),

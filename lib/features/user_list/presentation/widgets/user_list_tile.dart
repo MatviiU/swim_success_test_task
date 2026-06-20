@@ -4,7 +4,7 @@ import 'package:swim_success/core/router/app_routes.dart';
 import 'package:swim_success/features/user_list/domain/entities/user_entity.dart';
 
 class UserListTile extends StatelessWidget {
-  const UserListTile({super.key, required this.user});
+  const UserListTile({required this.user, super.key});
 
   final UserEntity user;
 

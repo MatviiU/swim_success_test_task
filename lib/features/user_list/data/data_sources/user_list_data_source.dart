@@ -12,15 +12,17 @@ class UserListDataSourceImpl implements UserListDataSource {
   static const _baseUrl = 'https://jsonplaceholder.typicode.com/users';
 
   final HttpClient httpClient;
-  
+
   @override
   Future<List<UserDto>> getUsers() async {
     final response = await httpClient.get(Uri.parse(_baseUrl));
     if (response is! List) {
-      throw ServerException('Invalid response format');
+      throw const ServerException('Invalid response format');
     }
 
-    final users = response.map((user) => UserDto.fromJson(user)).toList();
+    final users = response
+        .map((user) => UserDto.fromJson(user as Map<String, dynamic>))
+        .toList();
     return users;
   }
 }
